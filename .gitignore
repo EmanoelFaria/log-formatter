@@ -1,3 +1,6 @@
+# cli bundle
+bin/
+
 # Logs
 logs
 *.log

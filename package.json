@@ -1,0 +1,45 @@
+{
+  "name": "log-formatter",
+  "version": "1.0.0",
+  "description": "application responsible to get, format and save log files",
+  "main": "bin/src/app.js",
+  "scripts": {
+    "test": "rm -rf ./bin; npx tsc; jest",
+    "compile": "tsc"
+  },
+  "bin": {
+    "convert": "./bin/src/app.js"
+  },
+  "engines": {
+    "node": ">=10.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmanoelFaria/log-formatter.git"
+  },
+  "keywords": [
+    "log",
+    "formatter"
+  ],
+  "author": "Emanoel Faria",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EmanoelFaria/log-formatter/issues"
+  },
+  "homepage": "https://github.com/EmanoelFaria/log-formatter#readme",
+  "devDependencies": {
+    "@types/jest": "^28.1.3",
+    "@types/node": "^18.0.0",
+    "@types/yargs": "^17.0.10",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "jest": "^28.1.1",
+    "joi": "^17.6.0",
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "yargs": "^17.5.1"
+  }
+}

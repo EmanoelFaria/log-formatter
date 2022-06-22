@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "bin",
+    "module": "commonjs",                                
+    "target": "es2016",                                  
+    "experimentalDecorators": true,
+    "types": ["jest", "node"],
+    "sourceMap": true,
+    "allowJs": true,
+    "strict": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ]
+}
