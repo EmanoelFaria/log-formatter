@@ -2,10 +2,12 @@
 
 import { promisify } from 'util';
 import LogParserProviderFactory from '../factories/LogParserProviderFactory';
+import LogFormatterProviderFactory from '../factories/LogFormatterProviderFactory';
 import ICommandLineProvider from '../providers/CommandLineProvider/models/ICommandLineProvider';
 import ILogParserProvider from '../providers/LogParserProvider/models/ILogParserProvider';
 import IRequestProvider from '../providers/RequestProvider/models/IRequestProvider';
 import IFileManagerProvider from '../providers/FileManagerProvider/models/IFileManagerProvider';
+import ILogFormatterProvider from '../providers/LogFormatterProvider/models/ILogFormatterProvider';
 import { pipeline, Transform } from 'stream';
 import { IPossibleCommandLineArgs } from '../dtos/IPossibleCommandLineArgs';
 const pipelineAsync = promisify(pipeline);
@@ -13,6 +15,7 @@ const pipelineAsync = promisify(pipeline);
 export default class ConvertLogService {
   requestProvider: IRequestProvider;
   logParserProvider: ILogParserProvider;
+  logFormatterProvider: ILogFormatterProvider;
   commandLineProvider: ICommandLineProvider;
   fileManagerProvider: IFileManagerProvider;
   conversionOptions: IPossibleCommandLineArgs;
@@ -29,6 +32,10 @@ export default class ConvertLogService {
     this.logParserProvider = LogParserProviderFactory.getLogParserInstance(
       this.conversionOptions.origin,
     );
+    this.logFormatterProvider =
+      LogFormatterProviderFactory.getLogFormatterInstance(
+        this.conversionOptions.destiny,
+      );
   }
 
   getOptions(): IPossibleCommandLineArgs {
@@ -56,8 +63,7 @@ export default class ConvertLogService {
   }
 
   getHeader() {
-    console.log(this.conversionOptions);
-    return this.logParserProvider.getHeader(this.conversionOptions);
+    return this.logFormatterProvider.getHeader(this.conversionOptions);
   }
 
   parseChunkLines() {
@@ -66,8 +72,8 @@ export default class ConvertLogService {
         const lines = this.logParserProvider.parseChunkToLines(chunk);
         const linesValues = this.logParserProvider.parseLines(lines);
         const parsedLines =
-          this.logParserProvider.parseValuesToLines(linesValues);
-        const mergedLines = this.logParserProvider.mergeLines(parsedLines);
+          this.logFormatterProvider.parseValuesToLines(linesValues);
+        const mergedLines = this.logFormatterProvider.mergeLines(parsedLines);
 
         cb(null, mergedLines);
       },
