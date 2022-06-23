@@ -1,11 +1,9 @@
-import {
-  IAgoraFormattedHeader,
-  IAgoraFormattedLine,
-} from '../../../dtos/IAgoraFormattedLog';
+import { IAgoraFormattedLine } from '../../../dtos/IAgoraFormattedLog';
+import { IPossibleCommandLineArgs } from '../../../dtos/IPossibleCommandLineArgs';
 
 export default interface ILogParserProvider {
-  parseHeader(customHeader: string): IAgoraFormattedHeader;
-  parseLine(customLine: string): IAgoraFormattedLine | null;
+  getHeader(possibleOptions?: IPossibleCommandLineArgs): string;
+  parseLine(customLine: string): IAgoraFormattedLine | null | string;
   parseLines(customLines: string[]): IAgoraFormattedLine[];
   parseValuesToLines(lines: IAgoraFormattedLine[]): string[];
   parseResponse(response: any): any;

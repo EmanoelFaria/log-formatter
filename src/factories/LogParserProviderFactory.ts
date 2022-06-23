@@ -1,4 +1,4 @@
-import {ELogParserTypes} from '../providers/LogParserProvider/enums/ELogParserTypes';
+import { ELogParserTypes } from '../providers/LogParserProvider/enums/ELogParserTypes';
 import MinhaCDNLogParserProvider from '../providers/LogParserProvider/implementations/MinhaCDNLogParserProvider';
 import ILogParserProvider from '../providers/LogParserProvider/models/ILogParserProvider';
 
@@ -8,6 +8,8 @@ export default class LogParserProviderFactory {
 
     if (clientName.toLowerCase() === ELogParserTypes.minhacdn)
       return new MinhaCDNLogParserProvider();
+
+    // throw new Error('cant find log parser');
 
     return new MinhaCDNLogParserProvider();
   }

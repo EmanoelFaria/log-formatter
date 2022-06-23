@@ -1,17 +1,28 @@
-import {
-  IAgoraFormattedHeader,
-  IAgoraFormattedLine,
-} from '../../../dtos/IAgoraFormattedLog';
+import { IAgoraFormattedLine } from '../../../dtos/IAgoraFormattedLog';
+import { IPossibleCommandLineArgs } from '../../../dtos/IPossibleCommandLineArgs';
 import { ECacheStatusTypes } from '../enums/ECacheStatusTypes';
 import ILogParserProvider from '../models/ILogParserProvider';
 
 export default class MinhaCDNLogParserProvider implements ILogParserProvider {
-  parseHeader(customHeader: string): IAgoraFormattedHeader {
-    return {
-      version: 1.0,
-      date: new Date(),
-      fields: [''],
-    };
+  getHeader(possibleOptions?: IPossibleCommandLineArgs): string {
+    const headerVersion = possibleOptions?.version
+      ? possibleOptions.version
+      : '1.0';
+    const headerDate = this.formatDate();
+
+    return [
+      `#Version: ${headerVersion}\n`,
+      `#Date: ${headerDate}\n`,
+      `#Fields: provider http-method status-code uri-path response-size cache-status \n`,
+    ].join('');
+  }
+
+  private formatDate(date?: Date) {
+    date = date ? new Date(date) : new Date();
+
+    const data = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    const time = `${date.getHours()}:${date.getMinutes()}:${date.getMilliseconds()}`;
+    return `${data} ${time}`;
   }
 
   parseLine(customLine: string): IAgoraFormattedLine | null {
@@ -30,7 +41,7 @@ export default class MinhaCDNLogParserProvider implements ILogParserProvider {
     const uriPath = splittedLog[3].replace('"', '').split(' ')[1];
     const cacheStatus = this.parseCacheStatusFlag(splittedLog[2]);
     const timeTaken = Math.round(parseInt(splittedLog[4]));
-    const provider = '"MINHA CDN"';
+    const provider = 'MINHA CDN';
 
     return {
       provider,
