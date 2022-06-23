@@ -1,6 +1,7 @@
 import ICommandLineProvider from '../models/ICommandLineProvider';
 import yargs from 'yargs';
-import {hideBin} from 'yargs/helpers';
+import { hideBin } from 'yargs/helpers';
+import { IPossibleCommandLineArgs } from '../../../dtos/IPossibleCommandLineArgs';
 
 export default class YargsCommandLineProvider implements ICommandLineProvider {
   public getArrayArgs(): string[] {
@@ -11,9 +12,16 @@ export default class YargsCommandLineProvider implements ICommandLineProvider {
     return result._;
   }
 
-  public getArgs(): Object {
+  private getArgs(): any {
     const result = yargs(hideBin(process.argv)).argv;
-    if (!result) throw new Error('Invalid params');
-    return result;
+    return result || {};
+  }
+
+  public getPossibleArgs(): IPossibleCommandLineArgs {
+    console.log(this.getArgs());
+    return {
+      version: this.getArgs()['log-version'],
+      origin: this.getArgs()['origin'],
+    };
   }
 }

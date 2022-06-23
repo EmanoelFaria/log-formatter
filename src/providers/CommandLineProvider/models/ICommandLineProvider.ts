@@ -1,4 +1,6 @@
+import { IPossibleCommandLineArgs } from '../../../dtos/IPossibleCommandLineArgs';
+
 export default interface ICommandLineProvider {
   getArrayArgs(): string[];
-  getArgs(): any;
+  getPossibleArgs(): IPossibleCommandLineArgs;
 }
