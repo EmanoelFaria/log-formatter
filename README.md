@@ -33,6 +33,9 @@ To run the cli after installation just need follow the instructions below:
   Format:
   convert <origin url> <destination output> --<flag> <value>
 
+  Node (on root folder):
+  node . <origin url> <destination output> --<flag> <value>
+
   -------------------------------- [Examples] --------------------------------
 
   Example default options:

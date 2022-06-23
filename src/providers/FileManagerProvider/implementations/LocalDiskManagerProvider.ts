@@ -3,6 +3,7 @@ import fs from 'fs';
 
 export default class LocalDiskManagerProvider implements ICommandLineProvider {
   private folderExists(path: string): boolean {
+    if (path.length == 0) return true;
     return fs.existsSync(path);
   }
 
@@ -13,7 +14,8 @@ export default class LocalDiskManagerProvider implements ICommandLineProvider {
   private getFolderPath(path: string) {
     let result = path.split('/');
     result.pop();
-    return result.join('');
+    if (result.length == 0) return '.';
+    return result.join('/');
   }
   private getFilename(path: string) {
     return path.split('/').pop();
