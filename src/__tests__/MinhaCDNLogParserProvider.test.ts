@@ -25,7 +25,7 @@ describe('Unit tests for implementation of MinhaCDNLogParserProvider', () => {
         parsedLine,
       );
       expect(isSchemaValid).toBe(true);
-      expect(parsedLine?.provider).toBe('"MINHA CDN"');
+      expect(parsedLine?.provider).toBe('MINHA CDN');
       expect(parsedLine?.httpMethod).toBe('GET');
       expect(parsedLine?.statusCode).toBe(200);
       expect(parsedLine?.uriPath).toBe('/robots.txt');
@@ -43,7 +43,7 @@ describe('Unit tests for implementation of MinhaCDNLogParserProvider', () => {
         parsedLine,
       );
       expect(isSchemaValid).toBe(true);
-      expect(parsedLine?.provider).toBe('"MINHA CDN"');
+      expect(parsedLine?.provider).toBe('MINHA CDN');
       expect(parsedLine?.httpMethod).toBe('GET');
       expect(parsedLine?.statusCode).toBe(200);
       expect(parsedLine?.uriPath).toBe('/robots.txt');
@@ -62,7 +62,7 @@ describe('Unit tests for implementation of MinhaCDNLogParserProvider', () => {
         parsedLine,
       );
       expect(isSchemaValid).toBe(true);
-      expect(parsedLine?.provider).toBe('"MINHA CDN"');
+      expect(parsedLine?.provider).toBe('MINHA CDN');
       expect(parsedLine?.httpMethod).toBe('GET');
       expect(parsedLine?.statusCode).toBe(200);
       expect(parsedLine?.uriPath).toBe('/robots.txt');
